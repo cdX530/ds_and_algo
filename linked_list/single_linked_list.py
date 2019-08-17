@@ -1,4 +1,12 @@
-class Node:
+"""
+Implementation of a Single Linked List
+"""
+
+
+class _Node:
+    """
+    Represents each node in the Linked List
+    """
     def __init__(self):
         self._data = None
         self._next = None
@@ -24,20 +32,36 @@ class Node:
 
 
 class SingleLinkedList:
+    """
+    Implementation of a Single Linked List
+    """
     def __init__(self):
         self._length = 0
-        self.head = Node()
+        self.head = _Node()
 
     @property
     def head(self):
+        """
+        Getter for getting the head of the list
+        :return:
+        """
         return self._head
 
     @head.setter
     def head(self, head_node):
+        """
+        Setter to set the head node
+        :param head_node:
+        :return:
+        """
         self._head = head_node
 
     def insert_at_beginning(self, data):
-        new_node = Node()
+        """
+        Inserts the data into a new node at the beginning of the list
+        :param data: data to be inserted
+        """
+        new_node = _Node()
         new_node.data = data
         if self._length == 0:
             self.head = new_node
@@ -47,7 +71,11 @@ class SingleLinkedList:
         self._length += 1
 
     def insert_at_end(self, data):
-        new_node = Node()
+        """
+        Inserts the data into a new node at the end of the list
+        :param data: data to be inserted
+        """
+        new_node = _Node()
         new_node.data = data
 
         if self._length == 0:
@@ -62,13 +90,19 @@ class SingleLinkedList:
         self._length += 1
 
     def insert(self, data, pos=0):
+        """
+        Inserts data into a new node at the specified position in the list
+        :param data: data to be inserted
+        :param pos: position at which the data is to be inserted in the list.
+                    Defaults to 0.
+        """
         if pos > self._length or pos < 0:
-            raise Exception
+            print("Cannot insert on positions greater than length")
 
         if pos == 0:
             self.insert_at_beginning(data)
         else:
-            new_node = Node()
+            new_node = _Node()
             new_node.data = data
             current_node = self.head
             for i in range(pos-1):
@@ -79,26 +113,28 @@ class SingleLinkedList:
 
             self._length += 1
 
-    def __add__(self, data):
-        self.insert_at_end(data)
-        return self
-
     def delete_from_beginning(self):
+        """
+        Deletes the node from the beginning of the list
+        """
         if self._length == 0:
-            raise Exception
+            print("Cannot delete from empty list")
 
         self.head = self.head.next
         if not self.head:
-            self.head = Node()
+            self.head = _Node()
 
         self._length -= 1
 
     def delete_from_end(self):
+        """
+        Deletes the node from the end of the list
+        """
         if self._length == 0:
-            raise Exception
+            print("Cannot delete from empty list")
 
         if self._length == 1:
-            self.head = Node()
+            self.head = _Node()
         else:
             current_node = self.head
 
@@ -109,8 +145,12 @@ class SingleLinkedList:
         self._length -= 1
 
     def delete(self, pos=0):
+        """
+        Deletes the node from the specified position in the list
+        :param pos: position of the node to be deleted
+        """
         if pos >= self._length or pos < 0:
-            raise Exception
+            print("Position should be whole number less than length of list")
 
         if pos == 0:
             self.delete_from_beginning()
@@ -121,10 +161,13 @@ class SingleLinkedList:
             for i in range(pos-1):
                 current_node = current_node.next
 
-            current_node.next=current_node.next.next
+            current_node.next = current_node.next.next
             self._length -= 1
 
-    def traverse_list(self):
+    def print_list(self):
+        """
+        Prints the list.
+        """
         node = self._head
         print(f'{node.data}', end='')
 
@@ -137,4 +180,7 @@ class SingleLinkedList:
         print('')
 
     def __len__(self):
+        """
+        Gives the length of the list
+        """
         return self._length
