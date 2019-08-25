@@ -120,11 +120,13 @@ class SingleLinkedList:
         if self._length == 0:
             print("Cannot delete from empty list")
 
+        to_delete = self.head
         self.head = self.head.next
         if not self.head:
             self.head = _Node()
 
         self._length -= 1
+        return to_delete.data
 
     def delete_from_end(self):
         """
