@@ -184,3 +184,9 @@ class SingleLinkedList:
         Gives the length of the list
         """
         return self._length
+
+    def __iter__(self):
+        current = self.head
+        while current:
+            yield current.data
+            current = current.next
